@@ -1,0 +1,72 @@
+{% extends "display.html" %}
+
+{% block content %}
+
+<div class="header">
+    <h1>
+        Line Graph for data 
+    </h1>
+
+</div>
+<div id='linechart'>
+     
+    <canvas id="myChart" ></canvas>
+
+</div>
+
+
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    
+    function changeGraph(){
+        var Gtype = document.getElementById('type').value 
+        myChart.destroy()
+        new Chart(ctx, {type: Gtype, data: Gdata, options : Goptions});
+    }
+ 
+    function changeData(){
+        var Data = document.getElementById('Data').value 
+        var currentDate = document.getElementById('Data').selectedOptions[0].innerText;  
+        myChart.destroy()
+
+   
+        
+        if(Data == 'Date1'){
+            console.log({{dates.Date1}})
+            Gdata.datasets[0].data= {{dates.Date1}}
+            Gdata.datasets[0].label= currentDate
+            new Chart(ctx, {type: Gtype, data: Gdata, options : Goptions});
+
+            
+        }
+        else if(Data == 'Date2'){
+            console.log({{dates.Date2}})
+             console.log({{dates.Date1}})
+            Gdata.datasets[0].data= {{dates.Date2}}
+            Gdata.datasets[0].label= currentDate
+            new Chart(ctx, {type: Gtype, data: Gdata, options : Goptions});
+
+        }}
+    
+var Gtype = 'bar'
+var currentDate = document.getElementById('Data').selectedOptions[0].innerText;  
+
+var Gdata =  {
+    labels:{{labels | safe}},
+    datasets: [{
+        label: currentDate,
+        data: {{dates.Date1 | safe}},
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }]
+    }
+
+var Goptions =  {scales: {y: {beginAtZero: true}}}
+
+console.log(Gdata.datasets[0].data)
+
+var myChart = new Chart(ctx, {type: Gtype, data: Gdata, options : Goptions});
+
+</script>
+{% endblock %}

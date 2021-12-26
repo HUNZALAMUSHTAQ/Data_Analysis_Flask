@@ -9,4 +9,6 @@ Done Analysis according to need (Initial Practicing) and Used that to display on
 <li>Flask</li>
 <li>Pandas and Excel</li>
 <li>Graph JS</li>
+<li>CSS</li>
+<li>HTML</li>
 </ul>
